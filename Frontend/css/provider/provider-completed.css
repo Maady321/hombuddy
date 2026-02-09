@@ -1,0 +1,148 @@
+/* Orders Section */
+.orders-section {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.section-header h3 {
+    font-size: 1.5rem;
+    color: var(--dark-charcoal);
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--mist-blue);
+    border-radius: 6px;
+    background-color: white;
+    color: var(--slate-blue);
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: var(--steel-grey);
+    color: white;
+    border-color: var(--steel-grey);
+}
+
+/* Order Cards */
+.order-card {
+    background-color: var(--mist-blue);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.order-card:hover {
+    border-color: var(--steel-grey);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.order-id {
+    font-weight: bold;
+    color: var(--steel-grey);
+    font-size: 0.9rem;
+}
+
+.order-status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: white;
+}
+
+.status-completed {
+    background-color: var(--slate-blue);
+}
+
+/* Order Details */
+.order-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.order-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 0.85rem;
+    color: var(--slate-blue);
+    margin-bottom: 0.25rem;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: var(--dark-charcoal);
+}
+
+/* Customer Info */
+.customer-info {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.customer-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.customer-info span {
+    font-weight: 600;
+}
+
+/* Order Instructions */
+.order-instructions {
+    background-color: #E8F5E9;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.instructions-label {
+    font-weight: bold;
+    color: #2E7D32;
+    margin-bottom: 0.25rem;
+}
+
+.instructions-text {
+    color: #1B5E20;
+    font-style: italic;
+}

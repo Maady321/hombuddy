@@ -1,0 +1,119 @@
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    const response = await fetch("http://localhost:8000/api/bookings/my", {
+      headers: {
+        "User-ID": localStorage.getItem("user_id"),
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Failed to fetch bookings");
+    }
+    const bookings = await response.json();
+    document.getElementById("pending").innerHTML = "";
+    document.getElementById("confirmed").innerHTML = "";
+    document.getElementById("completed").innerHTML = "";
+    if (bookings.length === 0) {
+      document.getElementById("pending").innerHTML =
+        "<p>No bookings found.</p>";
+      return;
+    }
+    console.log(`Loaded ${bookings.length} bookings`);
+
+    bookings.forEach((booking, index) => {
+      let status = (booking.status || "pending").toLowerCase();
+      if (status === "accepted") status = "confirmed";
+      const container = document.getElementById(status);
+      if (!container) {
+        console.warn(
+          `Unknown status '${status}' for booking #${booking.id}, skipping.`,
+        );
+        return;
+      }
+      const card = document.createElement("div");
+      card.className = `booking-card ${status}`;
+      let actions = "";
+      const providerData = booking.provider
+        ? JSON.stringify(booking.provider).replace(/'/g, "&#39;")
+        : "null";
+      if (status === "pending") {
+        actions = `<button class="btn-cancel" onclick="cancelBooking(${booking.id})">Cancel</button>`;
+      } else if (status === "confirmed") {
+        actions = `
+                    <button class="btn-contact" onclick='window.showContact(${providerData})'>Contact</button>
+                    <button class="btn-cancel" onclick="cancelBooking(${booking.id})">Cancel</button>
+                `;
+      } else if (status === "completed") {
+        actions = `<a href="review.html?booking_id=${booking.id}&provider_id=${booking.provider_id}" class="a-review">Give Rating</a>`;
+      }
+      card.innerHTML = `
+                <div class="booking-icon">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+                <div class="booking-info">
+                    <h3>${booking.service_name}</h3> 
+                    <p class="booking-date">
+                        <i class="fa-regular fa-calendar"></i> ${booking.date} at ${booking.time}
+                    </p>
+                    <p class="booking-address">
+                        <i class="fa-solid fa-location-dot"></i> ${booking.address}
+                    </p>
+                    ${booking.provider ? `<p class="provider-name"><i class="fa-solid fa-user"></i> Provider: ${booking.provider.full_name}</p>` : booking.provider_id ? `<p class="provider-name"><i class="fa-solid fa-user"></i> Provider ID: ${booking.provider_id}</p>` : ""}
+                </div>
+                <div class="booking-status">
+                    <span class="status-badge ${status}">${status}</span>
+                </div>
+                <div class="booking-actions">
+                    ${actions}
+                </div>
+            `;
+
+      container.appendChild(card);
+    });
+
+    ["pending", "confirmed", "completed"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el && el.children.length === 0) {
+        el.innerHTML =
+          '<p style="padding: 1rem; color: var(--text-light);">No bookings in this category.</p>';
+      }
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    ["pending", "confirmed", "completed"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = "<p>Error loading bookings.</p>";
+    });
+  }
+});
+window.showContact = function (provider) {
+  if (!provider) {
+    alert("Provider information not available yet.");
+    return;
+  }
+  alert(
+    `Provider Contact Details:\n\nName: ${provider.full_name}\nEmail: ${provider.email}\nPhone: ${provider.phone}`,
+  );
+};
+async function cancelBooking(bookingId) {
+  if (!confirm("Are you sure you want to cancel this booking?")) return;
+  try {
+    const response = await fetch(
+      `http://localhost:8000/api/bookings/${bookingId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "User-ID": localStorage.getItem("user_id"),
+        },
+      },
+    );
+    if (response.ok) {
+      alert("Booking cancelled.");
+      location.reload();
+    } else {
+      alert("Failed to cancel booking.");
+    }
+  } catch (error) {
+    console.error("Error cancelling:", error);
+    alert("Error cancelling booking.");
+  }
+}

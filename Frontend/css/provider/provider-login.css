@@ -1,0 +1,177 @@
+/* ----------- LOGIN SECTION ----------- */
+/* ----------- LOGIN SECTION ----------- */
+.login-section {
+    padding: 3rem 2rem;
+    min-height: 80vh;
+    background-color: var(--cloud-white);
+}
+
+.login-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+}
+
+.login-card {
+    background-color: var(--mist-blue);
+    padding: 2.5rem;
+    border-radius: 12px;
+}
+
+.login-card h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.login-subtitle {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--slate-blue);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    padding: 0.875rem;
+    border: 2px solid var(--slate-blue);
+    border-radius: 6px;
+    background-color: var(--cloud-white);
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    border-color: var(--steel-grey);
+    outline: none;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.forgot-link {
+    color: var(--steel-grey);
+    font-size: 0.9rem;
+}
+
+.btn-primary {
+    background-color: var(--steel-grey);
+    color: var(--cloud-white);
+    padding: 0.875rem;
+    border: none;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-charcoal);
+}
+
+.divider {
+    text-align: center;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background-color: var(--slate-blue);
+}
+
+.divider::before {
+    left: 0;
+}
+
+.divider::after {
+    right: 0;
+}
+
+.social-login {
+    margin-top: 1rem;
+}
+
+.btn-social {
+    padding: 0.875rem;
+    border: 2px solid var(--slate-blue);
+    border-radius: 8px;
+    background-color: var(--cloud-white);
+    cursor: pointer;
+    width: 100%;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn-social:hover {
+    background-color: var(--slate-blue);
+    color: var(--cloud-white);
+}
+
+.btn-google {
+    border-color: #DB4437;
+}
+
+.btn-google:hover {
+    background-color: #DB4437;
+}
+
+.signup-prompt {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+/* ----- BENEFITS ----- */
+.login-benefits h2 {
+    margin-bottom: 1.5rem;
+}
+
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.benefits-list li {
+    background-color: var(--mist-blue);
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    gap: 1rem;
+}
+
+.benefit-icon {
+    background-color: var(--success-green);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

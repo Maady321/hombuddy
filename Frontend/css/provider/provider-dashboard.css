@@ -1,0 +1,145 @@
+/* Orders Section */
+.orders-section {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.section-header h3 {
+    font-size: 1.25rem;
+    color: #2A2E35;
+}
+
+/* Filters */
+.filter-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-btn {
+    padding: 0.5rem 1rem;
+    border: 2px solid #C9D6DF;
+    background-color: white;
+    color: #5A6D7A;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: #5A6D7A;
+    color: white;
+    border-color: #5A6D7A;
+}
+
+/* Order Card */
+.order-card {
+    background-color: #FAFBFC;
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.order-card:hover {
+    border-color: #FF6B35;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 1rem;
+}
+
+.order-id {
+    font-weight: bold;
+    color: #2E3944;
+    font-size: 0.9rem;
+}
+
+/* Status Badges */
+.order-status {
+    padding: 0.375rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-new {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status-accepted {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-completed {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.status-rejected {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Order Details */
+.order-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.order-detail {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    color: #5A6D7A;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+.detail-value {
+    color: #2A2E35;
+    font-weight: 600;
+}
+
+/* Customer */
+.customer-info,
+.order-instructions {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.customer-name {
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.customer-contact {
+    color: #5A6D7A;
+    font-size: 0.9rem;
+}

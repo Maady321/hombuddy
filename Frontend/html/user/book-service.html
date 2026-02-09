@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HomeBuddy - Book Service</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../../css/user/book-service.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="dashboard.html" class="logo">
+        <i class="fa-solid fa-house"></i> HomeBuddy
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="services.html">Services</a>
+        <a href="my-bookings.html">My Bookings</a>
+        <a href="login.html" class="btn-logout">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="booking-container">
+    <div class="booking-card">
+      <div class="booking-header">
+        <a href="services.html" class="back-link">
+          <i class="fa-solid fa-arrow-left"></i> Back to Services
+        </a>
+        <h1>Book a Service</h1>
+        <p>Fill in the details below to schedule your service</p>
+      </div>
+
+      <form class="booking-form" id="booking-form">
+        <input type="hidden" id="service_id" name="service_id" />
+
+        <div class="service-selected" id="selected-service-display">
+          <div class="service-icon">
+            <i class="fa-solid fa-broom"></i>
+          </div>
+          <div class="service-info">
+            <h3 id="display-service-name">Service</h3>
+            <span class="price" id="display-service-price">Price calculated based on requirements</span>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Service Location</h2>
+
+          <div class="form-group">
+            <label for="address">Full Address</label>
+            <input type="text" id="address" name="address" placeholder="Full Address" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="city">City</label>
+              <input type="text" id="city" name="city" placeholder="Chennai" required />
+            </div>
+            <div class="form-group">
+              <label for="zipcode">ZIP Code</label>
+              <input type="text" id="zipcode" name="zipcode" placeholder="Pincode" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Schedule</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Preferred Date</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div class="form-group">
+              <label for="time">Preferred Time</label>
+              <select id="time" name="time" required>
+                <option value="">Select a time</option>
+                <option value="09:00">9:00 AM</option>
+                <option value="10:00">10:00 AM</option>
+                <option value="11:00">11:00 AM</option>
+                <option value="12:00">12:00 PM</option>
+                <option value="13:00">1:00 PM</option>
+                <option value="14:00">2:00 PM</option>
+                <option value="15:00">3:00 PM</option>
+                <option value="16:00">4:00 PM</option>
+                <option value="17:00">5:00 PM</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h2>Additional Information</h2>
+
+          <div class="form-group">
+            <label for="notes">Special Instructions (Optional)</label>
+            <textarea id="notes" name="notes" rows="4"
+              placeholder="Any specific requirements or notes for the service provider..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <a href="services.html" class="btn-secondary">Cancel</a>
+          <button type="submit" class="btn-primary">Confirm Booking</button>
+        </div>
+      </form>
+      <script src="../../js/user/book-service.js" defer></script>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 HomeBuddy. All rights reserved.</p>
+  </footer>
+</body>
+
+</html>

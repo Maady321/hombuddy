@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Helper Login - HomeBuddy</title>
+  <link rel="stylesheet" href="../../css/provider/provider-styles.css" />
+  <link rel="stylesheet" href="../../css/provider/provider-login.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <span class="logo-icon"><i class="fa-solid fa-house"></i></span>
+        <h1>HomeBuddy Helper</h1>
+      </div>
+      <div class="nav-right">
+        <a href="../../../index.html" class="nav-link">Customer Site</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="login-section">
+    <div class="login-container">
+      <div class="login-card">
+        <h1>Helper Login</h1>
+        <p class="login-subtitle">
+          Login to manage your bookings and services
+        </p>
+
+        <form class="login-form" id="login-form">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+          </div>
+
+          <div class="form-options">
+            <label class="checkbox-label">
+              <input type="checkbox" name="remember" />
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="forgot-link">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="btn-primary btn-full">
+            Login to Dashboard
+          </button>
+        </form>
+        <script src="../../js/provider/provider-login.js" defer></script>
+
+        <p class="signup-prompt">
+          New helper? <a href="provider-signup.html">Register here</a>
+        </p>
+      </div>
+
+      <div class="login-benefits">
+        <h2>Why Join as a Helper?</h2>
+        <ul class="benefits-list">
+          <li>
+            <span class="benefit-icon">✓</span>
+            <div>
+              <strong>Steady Income</strong>
+              <p>Get regular bookings from verified customers</p>
+            </div>
+          </li>
+          <li>
+            <span class="benefit-icon">✓</span>
+            <div>
+              <strong>Direct Payment</strong>
+              <p>Receive payment directly from customers</p>
+            </div>
+          </li>
+          <li>
+            <span class="benefit-icon">✓</span>
+            <div>
+              <strong>Build Reputation</strong>
+              <p>Grow your business with ratings and reviews</p>
+            </div>
+          </li>
+          <li>
+            <span class="benefit-icon">✓</span>
+            <div>
+              <strong>Easy Management</strong>
+              <p>Simple dashboard to track all your bookings</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>HomeBuddy Helper</h3>
+          <p>Grow your business with trusted customers</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Support</h4>
+          <p>Email: helper-support@homebuddy.com</p>
+          <p>Phone: +91 1800-HELPERS</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 HomeBuddy. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

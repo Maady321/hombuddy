@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - HomeBuddy</title>
+    <link rel="stylesheet" href="../../css/admin/admin-login.css">
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo">🏠</div>
+            <h1>HomeBuddy Admin</h1>
+            <p>Admin Control Panel</p>
+        </div>
+
+        <div class="login-body">
+            <form id="admin-login-form">
+                <div class="form-group">
+                    <label for="email">Admin Email</label>
+                    <input type="email" id="email" name="email" placeholder="admin@homebuddy.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn-login">Login to Dashboard</button>
+            </form>
+            <script src="../../js/admin/admin-login.js" defer></script>
+
+            <div class="security-notice">
+                <p>
+                    🔒 <strong>Secure Access:</strong> This is a restricted area. All login attempts are monitored and
+                    logged for security purposes.
+                </p>
+            </div>
+
+            <div class="back-link">
+                <a href="../../../index.html">← Back to Customer Site</a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HomeBuddy - User Dashboard</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../css/user/style.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="dashboard.html" class="logo">
+        <i class="fa-solid fa-house"></i> HomeBuddy
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html" class="active">Dashboard</a>
+        <a href="services.html">Services</a>
+        <a href="my-bookings.html">My Bookings</a>
+        <a href="profile.html">Profile</a>
+        <a href="login.html" class="btn-logout">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="dashboard-container">
+    <section class="welcome-section">
+      <h1>
+        Welcome back, <span id="welcome-name">User</span>!
+        <i class="fa-regular fa-hand-wave"></i>
+      </h1>
+      <p>What would you like to do today?</p>
+    </section>
+
+    <section class="quick-actions">
+      <a href="services.html" class="action-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-wrench"></i>
+        </div>
+        <h3>Browse Services</h3>
+        <p>Explore our wide range of home services</p>
+      </a>
+
+      <a href="my-bookings.html" class="action-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-clipboard-list"></i>
+        </div>
+        <h3>My Bookings</h3>
+        <p>View and manage your service bookings</p>
+      </a>
+
+      <a href="support.html" class="action-card">
+        <div class="card-icon">
+          <i class="fa-solid fa-comments"></i>
+        </div>
+        <h3>Support</h3>
+        <p>Get help with your questions</p>
+      </a>
+    </section>
+
+    <section class="recent-bookings">
+      <h2>Recent Activity</h2>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-icon">
+            <i class="fa-solid fa-broom"></i>
+          </div>
+          <div class="activity-details">
+            <h4>House Cleaning</h4>
+            <p>Completed on Dec 14, 2025</p>
+          </div>
+          <span class="status completed">Completed</span>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon">
+            <i class="fa-solid fa-plug"></i>
+          </div>
+          <div class="activity-details">
+            <h4>Electrical Repair</h4>
+            <p>Scheduled for Dec 14, 2025</p>
+          </div>
+          <span class="status pending">Pending</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 HomeBuddy. All rights reserved.</p>
+  </footer>
+  <script src="../../js/user/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HomeBuddy - Give Review</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../../css/user/review.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-container">
+      <a href="dashboard.html" class="navbar-logo">
+        <i class="fa-solid fa-house"></i> HomeBuddy
+      </a>
+      <div class="navbar-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="services.html">Services</a>
+        <a href="my-bookings.html">My Bookings</a>
+        <a href="profile.html">Profile</a>
+        <a href="login.html" class="btn-logout">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="review-wrapper">
+    <section class="page-header">
+      <h1>Give Your Feedback</h1>
+      <p>Help us improve by rating your service provider</p>
+    </section>
+
+    <section class="review-form-section">
+      <div class="review-card">
+        <div class="provider-info">
+          <p class="provider-name" id="display-provider-name">
+            <i class="fa-solid fa-user"></i> Provider: --
+          </p>
+          <p class="service-name" id="display-service-name">
+            <i class="fa-solid fa-seedling"></i> --
+          </p>
+          <p class="booking-date" id="display-booking-date">
+            <i class="fa-regular fa-calendar"></i> --
+          </p>
+        </div>
+
+        <form class="review-form" action="dashboard.html" method="GET">
+          <label for="rating">Rating:</label>
+          <div class="rating-stars">
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label for="star5">★</label>
+
+            <input type="radio" id="star4" name="rating" value="4" />
+            <label for="star4">★</label>
+
+            <input type="radio" id="star3" name="rating" value="3" />
+            <label for="star3">★</label>
+
+            <input type="radio" id="star2" name="rating" value="2" />
+            <label for="star2">★</label>
+
+            <input type="radio" id="star1" name="rating" value="1" />
+            <label for="star1">★</label>
+          </div>
+
+          <label for="feedback">Feedback:</label>
+          <textarea id="feedback" name="feedback" rows="5" placeholder="Write your feedback here..."></textarea>
+
+          <button type="submit" class="btn-submit">Submit Review</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 HomeBuddy. All rights reserved.</p>
+  </footer>
+  <script src="../../js/user/review.js"></script>
+</body>
+
+</html>

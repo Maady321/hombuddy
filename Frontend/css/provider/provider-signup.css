@@ -1,0 +1,154 @@
+.signup-section {
+    padding: 3rem 2rem;
+    background-color: var(--cloud-white);
+}
+
+.signup-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.signup-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.signup-title {
+    color: var(--dark-charcoal);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.signup-subtitle {
+    color: var(--slate-blue);
+    font-size: 1.2rem;
+}
+
+.signup-card {
+    background-color: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.signup-card h2 {
+    color: var(--dark-charcoal);
+    margin-bottom: 2rem;
+}
+
+.form-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--mist-blue);
+}
+
+.form-section h3 {
+    color: var(--steel-grey);
+    margin-bottom: 1.5rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+
+.verification-notice {
+    background-color: #FFF3E0;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.verification-notice p {
+    color: #E65100;
+    margin: 0;
+}
+
+.doc-list {
+    display: grid;
+    gap: 1rem;
+}
+
+.doc-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--slate-blue);
+}
+
+.terms-box {
+    background-color: var(--mist-blue);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.terms-content {
+    display: flex;
+    gap: 1rem;
+}
+
+.terms-content input {
+    margin-top: 0.25rem;
+}
+
+.terms-content label {
+    color: var(--dark-charcoal);
+    margin: 0;
+}
+
+.steps-container {
+    margin-top: 3rem;
+    background-color: var(--mist-blue);
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.steps-container h3 {
+    color: var(--dark-charcoal);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.step-item {
+    text-align: center;
+}
+
+.step-number {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.step-item strong {
+    color: var(--dark-charcoal);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.step-item p {
+    color: var(--slate-blue);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.no-border {
+    border-bottom: none !important;
+}
+
+.btn-large {
+    font-size: 1.2rem;
+    padding: 1rem !important;
+}
+
+.link-bold {
+    color: var(--steel-grey);
+    font-weight: bold;
+}

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HomeBuddy - My Bookings</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../../css/user/my-bookings.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="dashboard.html" class="logo">
+        <i class="fa-solid fa-house"></i> HomeBuddy
+      </a>
+      <div class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="services.html">Services</a>
+        <a href="my-bookings.html" class="active">My Bookings</a>
+        <a href="profile.html">Profile</a>
+        <a href="login.html" class="btn-logout">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="bookings-container">
+    <section class="page-header">
+      <h1>My Bookings</h1>
+      <p>View and manage all your service bookings</p>
+    </section>
+
+    <div class="tabs">
+      <button class="tab active" data-tab="pending">Pending</button>
+      <button class="tab" data-tab="confirmed">Confirmed</button>
+      <button class="tab" data-tab="completed">Completed</button>
+    </div>
+
+    <!-- Pending Bookings -->
+    <section class="bookings-section" id="pending">
+      <div class="loading-msg">Loading...</div>
+    </section>
+
+    <!-- Confirmed Bookings -->
+    <section class="bookings-section hidden" id="confirmed">
+      <div class="loading-msg">Loading...</div>
+    </section>
+
+    <!-- Completed Bookings -->
+    <section class="bookings-section hidden" id="completed">
+      <div class="loading-msg">Loading...</div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 HomeBuddy. All rights reserved.</p>
+  </footer>
+  <script src="../../js/user/my-bookings.js" defer></script>
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    const sections = document.querySelectorAll(".bookings-section");
+
+    tabs.forEach((tab) => {
+      tab.onclick = () => {
+        tabs.forEach((t) => t.classList.remove("active"));
+        sections.forEach((s) => s.classList.add("hidden"));
+
+        tab.classList.add("active");
+        document.getElementById(tab.dataset.tab).classList.remove("hidden");
+      };
+    });
+  </script>
+</body>
+
+</html>
