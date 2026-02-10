@@ -6,5 +6,4 @@ python-dotenv
 passlib[bcrypt]
 pydantic
 python-multipart
-python-jose[cryptography]
 mangum

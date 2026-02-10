@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!container) return;
   try {
     const response = await fetch(
-      "/api/bookings/provider/confirmed",
+      `${API_BASE_URL}/api/bookings/provider/confirmed`,
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-Provider-ID": localStorage.getItem("provider_id"),
         },
       },
     );
@@ -71,11 +71,11 @@ async function completeBooking(bookingId) {
   if (!confirm("Mark this service as completed?")) return;
   try {
     const response = await fetch(
-      `/api/bookings/provider/${bookingId}/complete`,
+      `${API_BASE_URL}/api/bookings/provider/${bookingId}/complete`,
       {
         method: "PUT",
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-Provider-ID": localStorage.getItem("provider_id"),
         },
       },
     );

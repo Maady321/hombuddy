@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const userId = localStorage.getItem("user_id");
   try {
     const response = await fetch(
-      "/api/reviews/my/profile",
+      `${API_BASE_URL}/api/reviews/my/profile`,
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-Provider-ID": localStorage.getItem("provider_id"),
         },
       },
     );
@@ -85,10 +85,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   try {
     const response = await fetch(
-      "/api/reviews/my/reviews",
+      `${API_BASE_URL}/api/reviews/my/reviews`,
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-Provider-ID": localStorage.getItem("provider_id"),
         },
       },
     );

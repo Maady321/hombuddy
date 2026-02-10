@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("bookings-container");
   try {
     const response = await fetch(
-      "/api/bookings/provider/pending",
+      `${API_BASE_URL}/api/bookings/provider/pending`,
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-Provider-ID": localStorage.getItem("provider_id"),
         },
       },
     );
@@ -71,10 +71,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function updateStatistics() {
   try {
     const response = await fetch(
-      "/api/bookings/provider/statistics",
+      `${API_BASE_URL}/api/bookings/provider/statistics`,
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-Provider-ID": localStorage.getItem("provider_id"),
         },
       },
     );
@@ -119,11 +119,11 @@ async function acceptBooking(bookingId) {
 
   try {
     const response = await fetch(
-      `/api/bookings/provider/${bookingId}/confirm`,
+      `${API_BASE_URL}/api/bookings/provider/${bookingId}/confirm`,
       {
         method: "PUT",
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-Provider-ID": localStorage.getItem("provider_id"),
         },
       },
     );

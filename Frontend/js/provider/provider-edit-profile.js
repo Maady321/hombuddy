@@ -8,10 +8,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   updateNavBar();
   try {
     const response = await fetch(
-      `/api/providers/${providerId}`,
+      `${API_BASE_URL}/api/providers/${providerId}`,
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-Provider-ID": localStorage.getItem("provider_id"),
         },
       },
     );
@@ -53,12 +53,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
       try {
         const response = await fetch(
-          `/api/providers/update/${providerId}`,
+          `${API_BASE_URL}/api/providers/update/${providerId}`,
           {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+              "X-Provider-ID": localStorage.getItem("provider_id"),
             },
             body: JSON.stringify(updatedData),
           },

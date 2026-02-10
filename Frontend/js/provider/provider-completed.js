@@ -9,10 +9,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!container) return;
   try {
     const response = await fetch(
-      "/api/bookings/provider/completed",
+      `${API_BASE_URL}/api/bookings/provider/completed`,
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-Provider-ID": localStorage.getItem("provider_id"),
         },
       },
     );

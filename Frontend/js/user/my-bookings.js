@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/bookings/my`, {
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+        "X-User-ID": localStorage.getItem("user_id"),
       },
     });
     if (!response.ok) {
@@ -106,11 +106,11 @@ async function cancelBooking(bookingId) {
   if (!confirm("Are you sure you want to cancel this booking?")) return;
   try {
     const response = await fetch(
-      `/api/bookings/${bookingId}`,
+      `${API_BASE_URL}/api/bookings/${bookingId}`,
       {
         method: "DELETE",
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-User-ID": localStorage.getItem("user_id"),
         },
       },
     );

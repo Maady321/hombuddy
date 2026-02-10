@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+        "X-User-ID": localStorage.getItem("user_id"),
       },
     });
     if (response.ok) {
@@ -29,10 +29,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!activityContainer) return;
   try {
     const bookingsResponse = await fetch(
-      "/api/bookings/my",
+      `${API_BASE_URL}/api/bookings/my`,
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-User-ID": localStorage.getItem("user_id"),
         },
       },
     );

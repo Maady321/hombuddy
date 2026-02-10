@@ -11,10 +11,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const fetchBookingDetails = async () => {
     try {
       const response = await fetch(
-        `/api/bookings/${bookingId}`,
+        `${API_BASE_URL}/api/bookings/${bookingId}`,
         {
           headers: {
-            "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+            "X-User-ID": localStorage.getItem("user_id"),
           },
         },
       );
@@ -54,10 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const bookingResponse = await fetch(
-        `/api/bookings/${bookingId}`,
+        `${API_BASE_URL}/api/bookings/${bookingId}`,
         {
           headers: {
-            "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+            "X-User-ID": localStorage.getItem("user_id"),
           },
         },
       );
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+          "X-User-ID": localStorage.getItem("user_id"),
         },
         body: JSON.stringify(reviewData),
       });

@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("service_id").value = serviceId;
   try {
     const response = await fetch(
-      `/api/services/${serviceId}`,
+      `${API_BASE_URL}/api/services/${serviceId}`,
     );
     if (response.ok) {
       const service = await response.json();
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
+            "X-User-ID": localStorage.getItem("user_id"),
           },
           body: JSON.stringify(formData),
         });
