@@ -13,6 +13,7 @@ document
       return;
     }
     try {
+      console.log(`Attempting registration at: ${API_BASE_URL}/api/auth/register`);
       const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
         method: "POST",
         headers: {
@@ -26,22 +27,31 @@ document
           password,
         }),
       });
+
       if (response.ok) {
         alert("Registration successful! Redirecting to login...");
         window.location.href = "login.html";
       } else {
         let errorDetail = "Unknown error";
-        try {
-          const errorData = await response.json();
-          errorDetail = errorData.detail || errorDetail;
-        } catch (e) {
-          // If response is not JSON, use status text
-          errorDetail = `Server Error: ${response.status} ${response.statusText}`;
+        const contentType = response.headers.get("content-type");
+
+        if (contentType && contentType.includes("application/json")) {
+          try {
+            const errorData = await response.json();
+            errorDetail = errorData.detail || JSON.stringify(errorData);
+          } catch (e) {
+            errorDetail = `Failed to parse error JSON: ${response.status} ${response.statusText}`;
+          }
+        } else {
+          // Response is not JSON (likely HTML error from Vercel)
+          const text = await response.text();
+          console.error("Non-JSON error response:", text);
+          errorDetail = `Server Error: ${response.status} ${response.statusText}. Check console for details.`;
         }
         alert(`Registration failed: ${errorDetail}`);
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("An error occurred during registration.");
+      console.error("Fetch Error:", error);
+      alert(`An error occurred: ${error.message}`);
     }
   });
