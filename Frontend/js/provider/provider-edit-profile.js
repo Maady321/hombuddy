@@ -8,16 +8,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   updateNavBar();
   try {
     const response = await fetch(
-      "http://localhost:8000/api/reviews/my/profile",
+      `http://localhost:8000/api/providers/${providerId}`,
       {
         headers: {
-          "User-ID": userId,
+          "Provider-ID": providerId,
         },
       },
     );
     if (response.ok) {
-      const data = await response.json();
-      const p = data.profile;
+      const p = data; // response is the provider object directly
 
       const setVal = (id, val) => {
         const el = document.getElementById(id);
@@ -54,12 +53,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       };
       try {
         const response = await fetch(
-          "http://localhost:8000/api/reviews/my/profile",
+          `http://localhost:8000/api/providers/update/${providerId}`,
           {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
-              "User-ID": userId,
+              "Provider-ID": providerId,
             },
             body: JSON.stringify(updatedData),
           },
