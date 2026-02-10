@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "User-ID": localStorage.getItem("user_id"),
+            "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
           },
           body: JSON.stringify(formData),
         });

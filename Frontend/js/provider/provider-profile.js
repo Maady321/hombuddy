@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       "/api/reviews/my/profile",
       {
         headers: {
-          "User-ID": userId,
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
       },
     );
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       "/api/reviews/my/reviews",
       {
         headers: {
-          "User-ID": userId,
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
       },
     );

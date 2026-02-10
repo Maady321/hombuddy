@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch("/api/auth/profile", {
       headers: {
-        "User-ID": userId,
+        "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
       },
     });
     if (response.ok) {
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          "User-ID": userId,
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
         body: JSON.stringify(updatedData),
       });

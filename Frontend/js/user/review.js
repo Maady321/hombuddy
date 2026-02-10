@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `/api/bookings/${bookingId}`,
         {
           headers: {
-            "User-ID": localStorage.getItem("user_id"),
+            "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
           },
         },
       );
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
         `/api/bookings/${bookingId}`,
         {
           headers: {
-            "User-ID": localStorage.getItem("user_id"),
+            "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
           },
         },
       );
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "User-ID": localStorage.getItem("user_id"),
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
         body: JSON.stringify(reviewData),
       });

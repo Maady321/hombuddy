@@ -19,6 +19,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
 
       // Store session data based on role
       localStorage.setItem("role", result.role);
+      if (result.access_token) {
+        localStorage.setItem("access_token", result.access_token);
+      }
 
       if (result.role === "user") {
         localStorage.setItem("user_id", result.user_id);

@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   try {
     const response = await fetch("/api/auth/profile", {
       headers: {
-        "User-ID": userId,
+        "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
       },
     });
     if (response.ok) {
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       "/api/bookings/my",
       {
         headers: {
-          "User-ID": userId,
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
       },
     );

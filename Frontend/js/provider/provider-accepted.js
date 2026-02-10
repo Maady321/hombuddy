@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       "/api/bookings/provider/confirmed",
       {
         headers: {
-          "Provider-ID": localStorage.getItem("provider_id"),
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
       },
     );
@@ -75,7 +75,7 @@ async function completeBooking(bookingId) {
       {
         method: "PUT",
         headers: {
-          "Provider-ID": localStorage.getItem("provider_id"),
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
       },
     );

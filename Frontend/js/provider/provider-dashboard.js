@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       "/api/bookings/provider/pending",
       {
         headers: {
-          "Provider-ID": localStorage.getItem("provider_id"),
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
       },
     );
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     bookings.forEach((booking) => {
       const card = document.createElement("div");
       card.className = "order-card";
-      const serviceName = booking.service_id; 
+      const serviceName = booking.service_id;
       card.innerHTML = `
                 <div class="order-header">
                   <span class="order-id">Order #${booking.id}</span>
@@ -74,7 +74,7 @@ async function updateStatistics() {
       "/api/bookings/provider/statistics",
       {
         headers: {
-          "Provider-ID": localStorage.getItem("provider_id"),
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
       },
     );
@@ -123,7 +123,7 @@ async function acceptBooking(bookingId) {
       {
         method: "PUT",
         headers: {
-          "Provider-ID": localStorage.getItem("provider_id"),
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
       },
     );

@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         document.getElementById('users-count').textContent = users.length || 0;
 
         // Fetch Providers Count
-        const providerRes = await fetch('http://localhost:8000/providers/all');
+        const providerRes = await fetch('/api/providers/all');
         const providers = await providerRes.json();
         document.getElementById('providers-count').textContent = providers.length || 0;
 

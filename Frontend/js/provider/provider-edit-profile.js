@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       `/api/providers/${providerId}`,
       {
         headers: {
-          "Provider-ID": providerId,
+          "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
         },
       },
     );
@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             method: "PUT",
             headers: {
               "Content-Type": "application/json",
-              "Provider-ID": providerId,
+              "Authorization": `Bearer ${localStorage.getItem("access_token")}`,
             },
             body: JSON.stringify(updatedData),
           },
