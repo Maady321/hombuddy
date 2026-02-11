@@ -1,12 +1,11 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  window.checkAuth();
   const urlParams = new URLSearchParams(window.location.search);
   const serviceId = urlParams.get("service_id") || 1;
 
   document.getElementById("service_id").value = serviceId;
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/services/${serviceId}`,
-    );
+    const response = await makeRequest(`/api/services/${serviceId}`);
     if (response.ok) {
       const service = await response.json();
       document.getElementById("display-service-name").textContent =
@@ -44,12 +43,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         instructions: document.getElementById("notes").value,
       };
       try {
-        const response = await fetch(`${API_BASE_URL}/api/bookings`, {
+        const response = await makeRequest(`/api/bookings`, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "X-User-ID": localStorage.getItem("user_id"),
-          },
           body: JSON.stringify(formData),
         });
         if (response.ok) {

@@ -1,21 +1,14 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  window.checkAuth();
   const providerId = localStorage.getItem("provider_id");
   if (!providerId) {
-    window.location.href = "provider-login.html";
-    return;
+    // handled by checkAuth
   }
   updateNavBar();
   updateStatistics();
   const container = document.getElementById("bookings-container");
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/bookings/provider/pending`,
-      {
-        headers: {
-          "X-Provider-ID": localStorage.getItem("provider_id"),
-        },
-      },
-    );
+    const response = await makeRequest(`/api/bookings/provider/pending`);
     if (!response.ok) {
       throw new Error("Failed to fetch bookings");
     }
@@ -68,26 +61,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     container.innerHTML = `<div class="no-bookings"><p>Error loading requests.</p></div>`;
   }
 });
+
 async function updateStatistics() {
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/bookings/provider/statistics`,
-      {
-        headers: {
-          "X-Provider-ID": localStorage.getItem("provider_id"),
-        },
-      },
-    );
+    const response = await makeRequest(`/api/bookings/provider/statistics`);
     if (response.ok) {
       const stats = await response.json();
       document.getElementById("stat-pending").textContent = stats.pending;
       document.getElementById("stat-accepted").textContent = stats.accepted;
       document.getElementById("stat-completed").textContent = stats.completed;
       document.getElementById("stat-rating").textContent = stats.rating;
-      document.getElementById("stat-earnings").textContent =
-        `₹${stats.earnings}`;
-      document.getElementById("stat-completion-rate").textContent =
-        `${stats.completion_rate}%`;
+      document.getElementById("stat-earnings").textContent = `₹${stats.earnings}`;
+      document.getElementById("stat-completion-rate").textContent = `${stats.completion_rate}%`;
       const providerName = localStorage.getItem("provider_name");
       if (providerName) {
         document.getElementById("provider-name").textContent = providerName;
@@ -95,9 +80,9 @@ async function updateStatistics() {
     }
   } catch (error) {
     console.error("Error updating stats:", error);
-    // alert.("erroe in updating")
   }
 }
+
 function updateNavBar() {
   const providerName = localStorage.getItem("provider_name");
   if (providerName) {
@@ -114,19 +99,14 @@ function updateNavBar() {
     }
   }
 }
+
 async function acceptBooking(bookingId) {
   if (!confirm("Are you sure you want to accept this booking?")) return;
 
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/bookings/provider/${bookingId}/confirm`,
-      {
-        method: "PUT",
-        headers: {
-          "X-Provider-ID": localStorage.getItem("provider_id"),
-        },
-      },
-    );
+    const response = await makeRequest(`/api/bookings/provider/${bookingId}/confirm`, {
+      method: "PUT"
+    });
 
     if (response.ok) {
       alert("Booking confirmed!");

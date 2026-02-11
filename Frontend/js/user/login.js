@@ -19,6 +19,10 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
       // Clear previous session data
       localStorage.clear();
 
+      if (result.access_token) {
+        window.setToken(result.access_token);
+      }
+
       // Store session data based on role
       localStorage.setItem("role", result.role);
 
@@ -42,6 +46,7 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
       const contentType = response.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
         const errorData = await response.json();
+        // Since we changed backend to return access_token, check if we got one anyway (unlikely on error)
         errorDetail = errorData.detail || errorDetail;
       } else {
         // Likely a 405 or 404 HTML page from Vercel

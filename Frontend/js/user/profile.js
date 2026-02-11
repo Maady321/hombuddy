@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  window.checkAuth();
   const userId = localStorage.getItem("user_id");
   if (!userId) {
-    window.location.href = "login.html";
-    return;
+    // handled by checkAuth
   }
   const nameInput = document.getElementById("profile-name");
   const emailInput = document.getElementById("profile-email");
@@ -12,11 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const profileForm = document.querySelector(".profile-form");
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
-      headers: {
-        "X-User-ID": localStorage.getItem("user_id"),
-      },
-    });
+    const response = await makeRequest(`/api/auth/profile`);
     if (response.ok) {
       const user = await response.json();
       nameInput.value = user.name;
@@ -41,12 +37,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       address: addressInput.value,
     };
     try {
-      const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
+      const response = await makeRequest(`/api/auth/profile`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "X-User-ID": localStorage.getItem("user_id"),
-        },
         body: JSON.stringify(updatedData),
       });
       if (response.ok) {

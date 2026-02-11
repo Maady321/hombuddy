@@ -7,3 +7,7 @@ passlib[bcrypt]
 pydantic
 python-multipart
 mangum
+pyjwt
+requests
+bcrypt
+watchfiles

@@ -15,6 +15,9 @@ document.getElementById("login-form").addEventListener("submit", async (e) => {
     );
     if (response.ok) {
       const result = await response.json();
+      if (result.access_token) {
+        window.setToken(result.access_token);
+      }
       localStorage.setItem("provider_id", result.provider_id);
       localStorage.setItem("user_id", result.user_id);
       localStorage.setItem("provider_name", result.full_name);

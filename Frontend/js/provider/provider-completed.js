@@ -1,21 +1,14 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  window.checkAuth();
   const providerId = localStorage.getItem("provider_id");
   if (!providerId) {
-    window.location.href = "provider-login.html";
-    return;
+    // handled by checkAuth
   }
   updateNavBar();
   const container = document.getElementById("bookings-container");
   if (!container) return;
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/bookings/provider/completed`,
-      {
-        headers: {
-          "X-Provider-ID": localStorage.getItem("provider_id"),
-        },
-      },
-    );
+    const response = await makeRequest(`/api/bookings/provider/completed`);
     if (!response.ok) throw new Error("Failed to fetch completed bookings");
     const bookings = await response.json();
     updateSummary(bookings);

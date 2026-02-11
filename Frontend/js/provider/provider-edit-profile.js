@@ -1,20 +1,13 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  window.checkAuth();
   const providerId = localStorage.getItem("provider_id");
   const userId = localStorage.getItem("user_id");
   if (!providerId) {
-    window.location.href = "provider-login.html";
-    return;
+    // handled by checkAuth
   }
   updateNavBar();
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/providers/${providerId}`,
-      {
-        headers: {
-          "X-Provider-ID": localStorage.getItem("provider_id"),
-        },
-      },
-    );
+    const response = await makeRequest(`/api/providers/${providerId}`);
     if (response.ok) {
       const p = await response.json();
 
@@ -52,16 +45,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         bio: getVal("bio"),
       };
       try {
-        const response = await fetch(
-          `${API_BASE_URL}/api/providers/update/${providerId}`,
+        const response = await makeRequest(
+          `/api/providers/update/${providerId}`,
           {
             method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              "X-Provider-ID": localStorage.getItem("provider_id"),
-            },
             body: JSON.stringify(updatedData),
-          },
+          }
         );
         if (response.ok) {
           alert("Profile updated successfully!");

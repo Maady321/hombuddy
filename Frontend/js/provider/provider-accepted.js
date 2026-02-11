@@ -1,21 +1,14 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  window.checkAuth();
   const providerId = localStorage.getItem("provider_id");
   if (!providerId) {
-    window.location.href = "provider-login.html";
-    return;
+    // handled by checkAuth
   }
   updateNavBar();
   const container = document.getElementById("bookings-container");
   if (!container) return;
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/bookings/provider/confirmed`,
-      {
-        headers: {
-          "X-Provider-ID": localStorage.getItem("provider_id"),
-        },
-      },
-    );
+    const response = await makeRequest(`/api/bookings/provider/confirmed`);
     if (!response.ok) throw new Error("Failed to fetch confirmed bookings");
 
     const bookings = await response.json();
@@ -70,14 +63,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 async function completeBooking(bookingId) {
   if (!confirm("Mark this service as completed?")) return;
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/bookings/provider/${bookingId}/complete`,
+    const response = await makeRequest(
+      `/api/bookings/provider/${bookingId}/complete`,
       {
-        method: "PUT",
-        headers: {
-          "X-Provider-ID": localStorage.getItem("provider_id"),
-        },
-      },
+        method: "PUT"
+      }
     );
     if (response.ok) {
       alert("Booking completed!");

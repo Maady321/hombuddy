@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
+from auth import create_access_token
 from sqlalchemy.orm import Session
 from dependencies import get_db, get_current_user
 from models.users import User
@@ -45,7 +46,12 @@ def register_user(user: UserRegister, db: Session = Depends(get_db)):
         raise
     except Exception as e:
         import traceback
+        import datetime
         traceback.print_exc()
+        with open("register_error.log", "a") as f:
+            f.write(f"\n--- Error at {datetime.datetime.now()} ---\n")
+            f.write(f"Error: {str(e)}\n")
+            traceback.print_exc(file=f)
         print(f"CRITICAL ERROR IN REGISTER: {str(e)}", flush=True)
         raise HTTPException(status_code=500, detail=f"Registration failed: {str(e)}")
 
@@ -70,9 +76,12 @@ def login_user(user: UserLogin, db: Session = Depends(get_db)):
                 status_code=401, detail="Incorrect password. Please check and try again."
             )
 
+        access_token = create_access_token(data={"sub": str(db_user.id), "role": "user"})
         print(f"SUCCESS: Login successful for {normalized_email}", flush=True)
         return {
             "message": "Login successful",
+            "access_token": access_token,
+            "token_type": "bearer",
             "user_id": db_user.id,
             "user_name": db_user.name,
             "email": db_user.email,
@@ -90,41 +99,93 @@ def login_user(user: UserLogin, db: Session = Depends(get_db)):
 @router.post("/unified_login")
 def unified_login(user: UserLogin, db: Session = Depends(get_db)):
     print(f"Unified Login attempt for: {user.email}", flush=True)
+    try:
+        # 1. Check for Admin (Hardcoded)
+        if user.email == "admin@homebuddy.com" and user.password == "admin123":
+            print("Admin login successful", flush=True)
+            access_token = create_access_token(data={"sub": "admin", "role": "admin"})
+            return {
+                "message": "Login successful",
+                "access_token": access_token,
+                "token_type": "bearer",
+                "role": "admin",
+                "redirect": "Frontend/html/admin/admin-dashboard.html"
+            }
+
+        # 2. Check for User
+        print(f"Checking user table for {user.email}", flush=True)
+        db_user = db.query(User).filter(User.email == user.email.lower().strip()).first()
+        if db_user:
+            print(f"User found: {db_user.email}, verifying password...", flush=True)
+            if verify_password(user.password, db_user.password):
+                print("User password verified", flush=True)
+                access_token = create_access_token(data={"sub": str(db_user.id), "role": db_user.role})
+                
+                # Determine redirect based on role
+                redirect_path = "Frontend/html/user/dashboard.html"
+                if db_user.role == "provider":
+                    redirect_path = "Frontend/html/provider/provider-dashboard.html"
+                elif db_user.role == "admin":
+                    redirect_path = "Frontend/html/admin/admin-dashboard.html"
+
+                # Prepare response
+                response_data = {
+                    "message": "Login successful",
+                    "access_token": access_token,
+                    "token_type": "bearer",
+                    "role": db_user.role,
+                    "user_id": db_user.id,
+                    "name": db_user.name,
+                    "email": db_user.email,
+                    "redirect": redirect_path
+                }
+                
+                # Add provider_id if it's a provider
+                if db_user.role == "provider":
+                    db_provider = db.query(Provider).filter(Provider.user_id == db_user.id).first()
+                    if db_provider:
+                        response_data["provider_id"] = db_provider.id
+                        
+                return response_data
+            else:
+                print("User password mismatch", flush=True)
+        else:
+            print("User not found in users table", flush=True)
+
+        # 3. Check for Provider
+        print(f"Checking provider table for {user.email}", flush=True)
+        db_provider = db.query(Provider).filter(Provider.email == user.email).first()
+        if db_provider:
+             print(f"Provider found: {db_provider.email}, verifying password...", flush=True)
+             if verify_password(user.password, db_provider.password):
+                print("Provider password verified", flush=True)
+                access_token = create_access_token(data={"sub": str(db_provider.id), "role": "provider"})
+                return {
+                    "message": "Login successful",
+                    "access_token": access_token,
+                    "token_type": "bearer",
+                    "role": "provider",
+                    "provider_id": db_provider.id,
+                    "user_id": db_provider.user_id,
+                    "name": db_provider.full_name,
+                    "email": db_provider.email,
+                    "redirect": "Frontend/html/provider/provider-dashboard.html"
+                }
+             else:
+                print("Provider password mismatch", flush=True)
+        else:
+            print("Provider not found in providers table", flush=True)
+
+        print("Login failed: Invalid credentials", flush=True)
+        raise HTTPException(status_code=401, detail="Invalid email or password")
     
-    # 1. Check for Admin (Hardcoded)
-    if user.email == "admin@homebuddy.com" and user.password == "admin123":
-        return {
-            "message": "Login successful",
-            "role": "admin",
-            "redirect": "Frontend/html/admin/admin-dashboard.html"
-        }
-
-    # 2. Check for User
-    db_user = db.query(User).filter(User.email == user.email.lower().strip()).first()
-    if db_user and verify_password(user.password, db_user.password):
-        return {
-            "message": "Login successful",
-            "role": "user",
-            "user_id": db_user.id,
-            "name": db_user.name,
-            "email": db_user.email,
-            "redirect": "Frontend/html/user/dashboard.html"
-        }
-
-    # 3. Check for Provider
-    db_provider = db.query(Provider).filter(Provider.email == user.email).first()
-    if db_provider and verify_password(user.password, db_provider.password):
-        return {
-            "message": "Login successful",
-            "role": "provider",
-            "provider_id": db_provider.id,
-            "user_id": db_provider.user_id,
-            "name": db_provider.full_name,
-            "email": db_provider.email,
-            "redirect": "Frontend/html/provider/provider-dashboard.html"
-        }
-
-    raise HTTPException(status_code=401, detail="Invalid email or password")
+    except HTTPException:
+        raise
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        print(f"CRITICAL ERROR IN LOGIN: {str(e)}", flush=True)
+        raise HTTPException(status_code=500, detail=f"Internal Server Error: {str(e)}")
 
 
 @router.post("/provider/login")
@@ -147,8 +208,11 @@ def login_provider(user: UserLogin, db: Session = Depends(get_db)):
             f"DEBUG: Login successful for provider: '{user.email}', ID: {db_provider.id}",
             flush=True,
         )
+        access_token = create_access_token(data={"sub": str(db_provider.id), "role": "provider"})
         return {
             "message": "Login successful",
+            "access_token": access_token,
+            "token_type": "bearer",
             "provider_id": db_provider.id,
             "user_id": db_provider.user_id,
             "full_name": db_provider.full_name,

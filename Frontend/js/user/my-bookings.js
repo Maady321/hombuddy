@@ -1,10 +1,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  window.checkAuth();
   try {
-    const response = await fetch(`${API_BASE_URL}/api/bookings/my`, {
-      headers: {
-        "X-User-ID": localStorage.getItem("user_id"),
-      },
-    });
+    const response = await makeRequest(`/api/bookings/my`);
     if (!response.ok) {
       throw new Error("Failed to fetch bookings");
     }
@@ -105,14 +102,11 @@ window.showContact = function (bookingId) {
 async function cancelBooking(bookingId) {
   if (!confirm("Are you sure you want to cancel this booking?")) return;
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/bookings/${bookingId}`,
+    const response = await makeRequest(
+      `/api/bookings/${bookingId}`,
       {
-        method: "DELETE",
-        headers: {
-          "X-User-ID": localStorage.getItem("user_id"),
-        },
-      },
+        method: "DELETE"
+      }
     );
     if (response.ok) {
       alert("Booking cancelled.");

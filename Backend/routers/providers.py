@@ -27,7 +27,9 @@ def create_provider(provider: ProviderCreate, db: Session = Depends(get_db)):
     db.add(new_user)
     db.flush()
 
-    new_provider = Provider(user_id=new_user.id, **provider.model_dump())
+    provider_data = provider.model_dump()
+    provider_data["password"] = hash_password(provider.password)
+    new_provider = Provider(user_id=new_user.id, **provider_data)
 
     db.add(new_provider)
     db.commit()

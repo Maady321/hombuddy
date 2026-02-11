@@ -1,20 +1,13 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  window.checkAuth();
   const providerId = localStorage.getItem("provider_id");
   if (!providerId) {
-    window.location.href = "provider-login.html";
-    return;
+    // handled by checkAuth
   }
   updateNavBar();
   const userId = localStorage.getItem("user_id");
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/reviews/my/profile`,
-      {
-        headers: {
-          "X-Provider-ID": localStorage.getItem("provider_id"),
-        },
-      },
-    );
+    const response = await makeRequest(`/api/reviews/my/profile`);
     if (response.ok) {
       const data = await response.json();
       const p = data.profile;
@@ -84,14 +77,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/api/reviews/my/reviews`,
-      {
-        headers: {
-          "X-Provider-ID": localStorage.getItem("provider_id"),
-        },
-      },
-    );
+    const response = await makeRequest(`/api/reviews/my/reviews`);
     if (response.ok) {
       const reviews = await response.json();
       const container = document.getElementById("reviews-container");

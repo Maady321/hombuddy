@@ -1,23 +1,17 @@
 document.addEventListener("DOMContentLoaded", async () => {
+  window.checkAuth();
   const userId = localStorage.getItem("user_id");
   const welcomeName = document.getElementById("welcome-name");
-  if (!userId) {
-    window.location.href = "login.html";
-    return;
-  }
+
   const savedName = localStorage.getItem("user_name");
   if (savedName) {
-    welcomeName.textContent = savedName;
+    if (welcomeName) welcomeName.textContent = savedName;
   }
   try {
-    const response = await fetch(`${API_BASE_URL}/api/auth/profile`, {
-      headers: {
-        "X-User-ID": localStorage.getItem("user_id"),
-      },
-    });
+    const response = await makeRequest(`/api/auth/profile`);
     if (response.ok) {
       const user = await response.json();
-      welcomeName.textContent = user.name;
+      if (welcomeName) welcomeName.textContent = user.name;
       if (user.name !== savedName) {
         localStorage.setItem("user_name", user.name);
       }
@@ -28,14 +22,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const activityContainer = document.querySelector(".activity-list");
   if (!activityContainer) return;
   try {
-    const bookingsResponse = await fetch(
-      `${API_BASE_URL}/api/bookings/my`,
-      {
-        headers: {
-          "X-User-ID": localStorage.getItem("user_id"),
-        },
-      },
-    );
+    const bookingsResponse = await makeRequest(`/api/bookings/my`);
     if (bookingsResponse.ok) {
       const bookings = await bookingsResponse.json();
       bookings.sort((a, b) => {
@@ -87,8 +74,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   const logoutBtn = document.querySelector(".btn-logout");
   if (logoutBtn) {
     logoutBtn.addEventListener("click", (e) => {
-      localStorage.clear();
-      // Let the natural href "login.html" handle the navigation
+      window.removeToken();
+      e.preventDefault();
+      window.location.href = "login.html";
     });
   }
 });
