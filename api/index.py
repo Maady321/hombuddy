@@ -16,15 +16,11 @@ sys.path.insert(0, backend_path)
 os.environ['ENVIRONMENT'] = 'production'
 
 try:
-    # Import and wrap the FastAPI app for Vercel
-    from Backend.main import app as fastapi_app
-    from mangum import Mangum
+    # Import the FastAPI app for Vercel
+    from Backend.main import app
     
-    # Create Mangum handler for Vercel's Python runtime
-    app = Mangum(fastapi_app, lifespan="off")
-    
-    # Export as both app and application for compatibility
-    application = app
+    # Export as 'app' for Vercel Python runtime
+    # Vercel's Python runtime auto-detects 'app' variable
     
     print("✓ Vercel serverless function initialized successfully", flush=True)
     

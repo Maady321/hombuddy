@@ -43,8 +43,10 @@ else:
         "http://127.0.0.1:5500",
         "http://127.0.0.1:5173"
     ]
+    
+root_path = "/api" if ENVIRONMENT == "production" else ""
 
-app = FastAPI(redirect_slashes=False, title="HomeBuddy API", version="1.0.0")
+app = FastAPI(root_path=root_path, redirect_slashes=False, title="HomeBuddy API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -98,16 +100,16 @@ try:
     try:
         if db_seed.query(Service).count() == 0:
             logger.info("Seeding initial services...")
-            services = [
+            initial_services = [
                 Service(name="House Cleaning", price=500, description="Full professional house cleaning services"),
                 Service(name="Plumbing", price=300, description="Expert plumbing repairs and installations"),
                 Service(name="Electrical Work", price=400, description="Safe electrical wiring and repair services"),
                 Service(name="Home Cooking", price=600, description="Professional home-style meal preparation"),
                 Service(name="Laundry & Washing", price=200, description="High-quality laundry and garment care"),
             ]
-            db_seed.add_all(services)
+            db_seed.add_all(initial_services)
             db_seed.commit()
-            logger.info(f"Successfully seeded {len(services)} services.")
+            logger.info(f"Successfully seeded {len(initial_services)} services.")
             
         if db_seed.query(User).filter(User.role == "admin").count() == 0:
             logger.info("Seeding default admin...")
