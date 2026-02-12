@@ -31,18 +31,7 @@ if ENVIRONMENT == "production":
         env_origins = [url.strip() for url in frontend_url_env.split(",") if url.strip()]
         allowed_origins.extend(env_origins)
 else:
-    allowed_origins = [
-        "http://localhost:3000", 
-        "http://localhost:8000", 
-        "http://localhost:8001",
-        "http://localhost:5500",
-        "http://localhost:5173",
-        "http://127.0.0.1:3000", 
-        "http://127.0.0.1:8000",
-        "http://127.0.0.1:8001",
-        "http://127.0.0.1:5500",
-        "http://127.0.0.1:5173"
-    ]
+    allowed_origins = ["*"]
     
 root_path = "/api" if ENVIRONMENT == "production" else ""
 

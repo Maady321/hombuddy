@@ -1,0 +1,18 @@
+Error Description:
+The application encountered an issue where the PostgreSQL database `project_backend_db` did not exist, leading to connection failures when starting the backend. Specifically, the backend would fail with an error similar to `psycopg2.OperationalError: FATAL: database "project_backend_db" does not exist` because there was no automated mechanism to create the database before the application tried to connect to it.
+
+How It Was Fixed:
+The fix involved creating a new Python script, `Backend/create_db.py`, which is responsible for setting up the initial database environment.
+1. The script connects to the default `postgres` database using credentials from the `.env` file or defaults.
+2. It sets the isolation level to `AUTOCOMMIT` to allow database creation commands.
+3. It checks if `project_backend_db` already exists.
+4. If the database does not exist, the script creates it.
+5. This ensures that the backend has a valid database to connect to upon startup.
+
+Changes Made in the File (`Backend/create_db.py`):
+- Total lines added: 52
+- Key additions:
+    - Imported `psycopg2` and `dotenv`.
+    - Added logic to load environment variables.
+    - Added `create_database()` function to handle connection and creation logic.
+    - Added error handling to catch and display issues during setup.

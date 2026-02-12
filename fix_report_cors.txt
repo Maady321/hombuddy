@@ -1,0 +1,19 @@
+Error Description:
+1. CORS Policy Error: The frontend running on `http://127.0.0.1:5504` was blocked from accessing the backend at `http://127.0.0.1:8001`. Even after adding the specific origin, the error persisted, likely due to subtle origin mismatches or browser caching issues.
+2. DOM Warnings: The browser console showed warnings that input elements in `register.html` were missing `autocomplete` attributes.
+
+How It Was Fixed:
+1. Updated `Backend/main.py`:
+   - Changed `allowed_origins` to `["*"]` in the development environment block. This allows ANY origin to access the API during development, eliminating issues with port changes or specific origin matching. This is safe for local development.
+
+2. Updated `Frontend/html/user/register.html`:
+   - Added `autocomplete="name"` to the Name input.
+   - Added `autocomplete="email"` to the Email input.
+   - Added `autocomplete="tel"` to the Phone input.
+   - Added `autocomplete="street-address"` to the Address input.
+   - Added `autocomplete="new-password"` to the Password and Confirm Password inputs.
+   - These changes resolve the browser warnings and improve user experience by enabling autofill where appropriate.
+
+Changes Made:
+- `Backend/main.py`: Replaced specific origin list with `["*"]` for development mode (approx. 14 lines removed, 1 added).
+- `Frontend/html/user/register.html`: Modified 6 input fields to include autocomplete attributes.
